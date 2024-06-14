@@ -8,7 +8,7 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useState } from "react";
-import { BookingResponse, createBooking } from "@/actions/booking-action";
+import { createBooking } from "@/actions/booking-action";
 
 const SingleEventPage = () => {
   const auth = useAuth();
@@ -23,7 +23,7 @@ const SingleEventPage = () => {
   });
   const mutation = useMutation({
     mutationFn: createBooking,
-    onSuccess: (data: BookingResponse) => {
+    onSuccess: () => {
       toast({
         title: "Successfully booked",
       });
