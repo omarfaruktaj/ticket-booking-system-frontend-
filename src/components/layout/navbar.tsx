@@ -1,3 +1,4 @@
+import useAuth from "@/hooks/use-auth";
 import { Button } from "../ui/button";
 import {
   Sheet,
@@ -7,8 +8,20 @@ import {
   SheetTrigger,
 } from "../ui/sheet";
 import SidebarRoutes from "./sidebar-routes";
+import { Link, useNavigate } from "react-router-dom";
+
+import toast from "react-hot-toast";
 
 export default function Navbar() {
+  const auth = useAuth();
+
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    localStorage.removeItem("token");
+    toast.success("success fully logout");
+    navigate(0);
+  };
+
   return (
     <div className="p-4 border-b h-full flex items-center justify-between md:justify-end bg-white shadow-sm">
       <div className=" md:hidden">
@@ -38,7 +51,15 @@ export default function Navbar() {
         </Sheet>
       </div>
       <div className="">
-        <Button>Login</Button>
+        {auth?.user ? (
+          <Button onClick={handleLogout} variant={"destructive"}>
+            Logout
+          </Button>
+        ) : (
+          <Button asChild>
+            <Link to={"/login"}>login</Link>
+          </Button>
+        )}
       </div>
     </div>
   );

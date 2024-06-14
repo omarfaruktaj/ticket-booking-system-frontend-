@@ -1,3 +1,4 @@
+import useAuth from "@/hooks/use-auth";
 import { NavLink } from "react-router-dom"; // Import NavLink from react-router-dom
 
 // Function to generate class name for NavLink
@@ -18,6 +19,7 @@ const getNavLinkClassName = ({
 };
 
 export default function SidebarRoutes() {
+  const auth = useAuth();
   // Filter out hidden routes
   const routes = [
     {
@@ -27,8 +29,8 @@ export default function SidebarRoutes() {
     },
     {
       label: "Booking",
-      href: "/booking",
-      isHidden: false,
+      href: "/bookings",
+      isHidden: !auth?.user,
     },
   ];
   const visibleRoutes = routes.filter((route) => !route.isHidden);
