@@ -14,7 +14,10 @@ export interface IEvent {
 
 export const getEvents = async (): Promise<IEvent[]> => {
   try {
-    const { data } = await axios.get("http://localhost:5000/api/events", {});
+    const { data } = await axios.get(
+      "https://ticket-booking-system-backend.vercel.app/api/events",
+      {}
+    );
 
     return data.data;
   } catch (error) {
@@ -31,7 +34,9 @@ export const getEvents = async (): Promise<IEvent[]> => {
 };
 export const getAEvent = async (id: string): Promise<IEvent> => {
   try {
-    const { data } = await axios.get(`http://localhost:5000/api/events/${id}`);
+    const { data } = await axios.get(
+      `https://ticket-booking-system-backend.vercel.app/api/events/${id}`
+    );
 
     return data.data;
   } catch (error) {

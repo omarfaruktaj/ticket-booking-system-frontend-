@@ -13,7 +13,7 @@ export type LoginResponseData = {
 export const registerUser = async (formData: RegisterFormData) => {
   try {
     const { data } = await axios.post(
-      "http://localhost:5000/api/auth/register",
+      "https://ticket-booking-system-backend.vercel.app/api/auth/register",
       formData
     );
 
@@ -36,7 +36,7 @@ export const loginUser = async (
 ): Promise<LoginResponseData> => {
   try {
     const { data } = await axios.post(
-      "http://localhost:5000/api/auth/login",
+      "https://ticket-booking-system-backend.vercel.app/api/auth/login",
       formData
     );
     return data;
@@ -62,11 +62,14 @@ export interface UserInterface {
 export const getMe = async (): Promise<UserInterface> => {
   try {
     const token = localStorage.getItem("token");
-    const { data } = await axios.get("http://localhost:5000/api/auth/me", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const { data } = await axios.get(
+      "https://ticket-booking-system-backend.vercel.app/api/auth/me",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     return data.data;
   } catch (error) {
